@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #222;
+            color: #f00;
+            font-size: 90px;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .boom {
+            animation: 1.5s boomFrames;
+        }
+
+        @keyframes boomFrames {
+            20% {
+                transform: scale(10);
+            }
+            50% {
+                transform: translateX(-100%);
+            }
+            60%{
+                transform: translateX(100%);
+            }
+            70%{
+                background-color: yellow;
+            }
+            90%{
+                opacity: 0;
+            }
+        }
+    </style>
+
+    <script>
+        window.addEventListener("load", function() {
+            let counter = 10;
+            const timer = setInterval(function() {
+                document.body.innerHTML = counter;
+                counter--;
+                if(counter < 0) {
+                    clearInterval(timer);
+                    document.body.classList.add("boom");
+                }
+            }, 300);
+        });
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

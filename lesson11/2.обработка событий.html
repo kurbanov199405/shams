@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="app">
+       
+        <button @click="dec">-</button>
+            {{counter}}
+        <button @click="inc">+</button>
+        
+        <p v-if = "message != ''" class="error"> {{message}}</p>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const app = new Vue({
+                el: ".app", 
+                data: { //стартовые значения
+                   counter: 0,
+                   message: " ",
+                },
+                methods: { //любые произвольные функции
+                    inc: function() {
+                        //в методах значения из data доступны через this
+                        if(this.counter < 20) { //здесь this означает .app, по другому можно было записать app.counter < 20
+                            this.counter++;
+                            this.message = "";
+                        } else {
+                            this.message = "Извините вы уже по моему борщите с цыфрами";
+                        }
+                    },
+                    dec: function() {
+                        if(this.counter > 0) {
+                            this.counter--;
+                            this.message = "";
+                        } else {
+                            this.message = "Извините вы уже по моему борщите с цыфрами";
+                        }
+                    },
+                },
+            });
+
+            
+        });
+    </script>
+</body>
+</html>

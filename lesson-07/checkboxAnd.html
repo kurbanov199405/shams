@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        .night-mode {
+            color: #f1f1f1;
+            background: #222;
+        }
+    </style>
+    <title>Chebox</title>
+</head>
+<body>
+    <h1>Тут очень много текста</h1>
+    <p>Но нам лень его писать :)</p>
+    <input type="checkbox" id="enableNightMode">
+    <label for="enableNightMode">Включить ночную тему</label>
+    <hr>
+
+    Выберите размер шрифта:<br>
+    <input name="fontSize" type="radio" id="radio-1" value="16px">
+    <label for="radio-1">Обычный</label>
+
+    <input name="fontSize" type="radio" id="radio-2" value="18px">
+    <label for="radio-2">Крупнее</label>
+
+    <input name="fontSize" type="radio" id="radio-3" value="22px">
+    <label for="radio-3">Большой</label>
+
+    <script>
+        window.addEventListener("load", function() {
+            let nightModeCheckbox = document.querySelector("#enableNightMode");
+            nightModeCheckbox.addEventListener("change", function() {
+                //Тут говориться что если чекбокс отмечен то добавляется класс на выбранный элемент в данном случае боди или если 
+                //отметка убрана этот же класс удаляется
+                if (this.checked) {
+                document.body.classList.add("night-mode");
+            } else {
+                document.body.classList.remove("night-mode");
+            }
+            });
+
+            //тут мы при отметке определенного радио инпута мы меняем размер шрифта
+            let radioButtons = document.querySelectorAll("[name='fontSize']");
+            for (let i=0; i<radioButtons.length; i++) {
+                let radio = radioButtons[i].addEventListener("change", function() {
+                    document.body.style.fontSize = this.value;
+                });
+            }
+        });
+    </script>
+</body>
+</html>

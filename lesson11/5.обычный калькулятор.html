@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="calc">
+            <input v-model="a" type="number">
+        <select v-model="operation">
+            <option value="">- не выбрано -</option>
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+        </select>
+        <input v-model="b" type="number">
+        
+        <p class="result">
+            Результат сложения: {{total}}
+        </p>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            new Vue({
+                el: ".calc",
+                data: {
+                    a: "",
+                    b: "",
+                    operation: "",
+                },
+                computed: {
+                    total: function() {
+                        if(this.operation === "+") {
+                            let result = +this.a + +this.b;
+                            return result;
+                        } else if(this.operation === "-") {
+                            result = this.a - this.b;
+                            return result;
+                        } else if(this.operation === "*") {
+                            result = this.a * this.b;
+                            return result;
+                        } else if(this.operation === "/") {
+                            result = this.a / this.b;
+                            return result;
+                        }
+                    },
+                },
+            });
+        });
+    </script>
+</body>
+</html>

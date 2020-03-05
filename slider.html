@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *,*::before, *::after {
+            box-sizing: border-box;
+        }
+
+        .slider {
+            max-width: 400px;
+            border: 2px solid;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .slider ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            transition: 1s;
+        }
+
+        .slider li {
+            width: 100%;
+            flex-shrink: 0;
+            font-size: 28px;
+            text-align: center;
+            padding: 50px 100px;
+        }
+
+        .next, .prev {
+            position: absolute;
+            top: 0;
+            height: 100%;
+            background-color: rgba(0,0,0,0.2);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 0;
+        }
+
+        .prev {
+            left: 0;
+        }
+
+        .next {
+            right: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="slider">
+        <ul>
+            <li>это какой то текст</li>
+            <li>2 слайд</li>
+            <li>3 слайд</li>
+        </ul>
+        <button class="next">&gt;</button>
+        <button class="prev">&lt;</button>
+    </div>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+    window.addEventListener("load", function() {
+        let slider = document.querySelector(".slider");
+        let next = document.querySelector(".next");
+        let prev = document.querySelector(".prev");
+        let slides = document.querySelectorAll(".slider li");
+        let ul = document.querySelector(".slider ul");
+        let width = slider.clientWidth;
+        let corrent = 0;
+
+        next.addEventListener("click", function() {
+            if(corrent < slides.length -1) {
+                corrent++;
+            }else{
+                corrent = 0;
+            }
+
+            ul.style.marginLeft = (-corrent * width) + "px";
+        });
+
+        prev.addEventListener("click", function() {
+            if(corrent > 0) {
+                corrent--;
+            }else{
+                corrent = slides.length -1;
+            }
+
+            ul.style.marginLeft = (-corrent * width) + "px";
+        });
+
+        window.addEventListener("resize", function() {
+            width = slider.clientWidth;
+            ul.style.marginLeft = (-corrent * width) + "px";
+        });
+    });
+
+    
+    </script>
+</body>
+</html>

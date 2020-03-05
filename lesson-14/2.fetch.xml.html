@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <button class="load">Загрузить</button>
+    <div class="result"></div>
+   <script>
+
+       //делаем то же самое что и xmlHttpsRequest.html только меньше кода, в отличии от предыдущей он не очень кроссбраузерная
+       "use strict";
+       document.addEventListener("DOMContentLoaded", function() {
+          const load = document.querySelector(".load");
+          const result = document.querySelector(".result");
+
+          load.addEventListener("click", () => {
+           fetch("https://www.cbr-xml-daily.ru/daily_json.js")
+            .then(response => response.json())
+            .then(data => {
+                //данные будут доступины только здесь которые пришли с внешнего сервера
+                result.innerHTML = `Курс доллара ${data.Valute.USD.Value} руб.`;
+            });
+          }); 
+       });
+   </script> 
+</body>
+</html>

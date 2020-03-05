@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<title>вывод текста с интервалом</title>
+	<meta charset="utf-8" />
+	<script>
+		window.addEventListener("DOMContentLoaded", function() {
+		//Задача нужно сделать так чтоб буквы текста выходили по порядку и чтоб могли печатать
+		//Забираем текст который нужно вывести
+		const textContainer = document.querySelector("#text");
+		//скопируем текст
+		const textCopy = textContainer.innerHTML;
+		//зачистим сам текст но не копию
+		textContainer.innerHTML = "";
+		textContainer.style.opacity = 1;
+		//заводим счетчик
+		let i = 0;
+		const setTypingTimer = function(delay) {
+			return setTimeout(function() {
+				textContainer.innerHTML += textCopy[i];
+				i++;
+				if(i < textCopy.length) {
+					const rand = Math.floor(Math.random() * 100 + 50);
+					timer = setTypingTimer(rand);
+				}
+			}, delay);
+		};
+
+		let timer = setTypingTimer(50);
+		//печать текста на клавиатуре
+		document.addEventListener("keypress", function(e) {
+			if(e.key === "Enter") {
+				textContainer.innerHTML += "\n";
+			} else {
+				textContainer.innerHTML += e.key;
+			}
+		});
+
+		document.addEventListener("keydown", function(e) {
+			if(e.key === "Backspace") {
+				textContainer.innerHTML = textContainer.innerHTML.slice(0, textContainer.innerHTML.length - 1);
+			}
+		});
+	});
+	</script>
+	<style>
+		#text {
+			/*opacity: 0;*/
+		}
+
+		#text::after {
+			content: '';
+			display: inline-block;
+			border-right: 1px solid #111;
+			height: 16px;
+			vertical-align: middle;
+			margin-left: 2px;
+			animation: 1s blink infinite;
+		}
+
+		@keyframes blink {
+			0% { opacity: 1; }
+			100% { opacity: 0; }
+		}
+	</style>
+</head>
+<body>
+<div id="text">Это текст, который <strong>нужно</strong> будет вывести побуквенно (с интервалом)</div>
+</body>
+</html>

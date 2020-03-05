@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h1 {
+            text-align: center;
+        }
+
+        .form_main {
+            width: 400px;
+            padding: 10px;
+            margin: 0 auto;
+            background-color: rgba(105, 105, 105, 0.562);
+        }
+
+        .feed_form {
+            margin: 0 auto;
+            width: 250px;
+        }
+
+        .feed_form:nth-child(2), .feed_form:nth-child(3), .feed_form:nth-child(4) {
+            margin-top: 10px;
+        }
+
+        input:focus {
+            outline: none;
+        }
+
+        input {
+            border: none;
+        }
+
+        input[name="name"], input[name="age"] {
+            width: 230px;
+            padding: 5px 10px;
+        }
+
+        .btn {
+            display: block;
+            margin: 20px auto 0 auto;
+        }
+
+        .table {
+            margin: 30px auto 0 auto;
+        }
+
+        caption {
+            font-size: 20px;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        th {
+            padding:10px 20px;
+            border: 1px solid;
+        }
+
+        td {
+            padding: 5px;
+            text-align: center;
+            border: 1px solid;
+
+        }
+
+        .error1, .error2, .error3, .error4 {
+            color: red;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>ДОБАВЛЕНИЕ ПОЛЗОВАТЕЛЕЙ</h1>
+    <div class="form_main">
+        <div class="feed_form">
+            <label>
+                ИМЯ:<br>
+                <input name="name" type="text" class="name" placeholder="Введите ваше имя">
+            </label>
+            <div class="error1">заполните пожалуйста поле</div>
+        </div>
+
+        <div class="feed_form">
+            <label>
+                ВОЗРАСТ:<br>
+                <input name="age" type="number" class="age" placeholder="Введите ваш возраст">
+            </label>
+            <div class="error2">заполните пожалуйста поле</div>
+        </div>
+
+        <div class="feed_form">
+            ПОЛ:<br>
+            <label>
+                муж<input name="man" type="radio" class="man">
+            </label>
+            <label>
+                жен<input name="man" type="radio" class="woman">
+            </label>
+            <div class="error3">выберите пожалуйста пол</div>
+        </div>
+
+        <div class="feed_form">
+            ГРАЖДАНСТВО:<br>
+            <select class="nationality">
+                <option value="">- не выбрано -</option>
+                <option value="Россия">Россия</option>
+                <option value="СНГ">СНГ</option>
+                <option value="Евросоюз">Евросоюз</option>
+                <option value="Другие страны">Другие страны</option>
+            </select>
+            <div class="error4">выберите пожалуйста гражданство</div>
+        </div>
+        <button class="btn">отправить</button>
+    </div>
+
+    <table class="table">
+        <caption>Список пользователей</caption>
+        <tr>
+            <th>Имя</th>
+            <th>Возраст</th>
+            <th>Пол</th>
+            <th>Гражданство</th>
+        </tr>
+    </table>
+    <script>
+        window.addEventListener("load", function() {
+            let name = document.querySelector(".name");
+            let age = document.querySelector(".age");
+            let man = document.querySelector(".man");
+            let woman = document.querySelector(".woman");
+            let select = document.querySelector(".nationality");
+            let option = select.querySelector("option");
+            let btn = document.querySelector(".btn");
+            let table = document.querySelector(".table");
+            let error1 = document.querySelector(".error1");
+            let error2 = document.querySelector(".error2");
+            let error3 = document.querySelector(".error3");
+            let error4 = document.querySelector(".error4");
+
+            btn.addEventListener("click", function() {
+                let html = '<tr>';
+               if(!name.value) {
+                error1.style.display = "block";
+                name.style.border = "1px solid red";
+               } else {
+                    error1.style.display = "none";
+                    name.style.border = "none";
+                    html = html + '<td>' + name.value + '</td>';
+               }
+
+               if(!age.value) {
+                    error2.style.display = "block";
+                    age.style.border = "1px solid red";
+               } else {
+                    error2.style.display = "none";
+                    age.style.border = "none";
+                    html = html + '<td>' + age.value + '</td>';
+               }
+
+               if(!man.checked) {
+                    error3.style.display = "block";
+               } else {
+                    error3.style.display = "none";
+                    html = html + '<td>' + 'муж' + '</td>';
+               }
+
+               if(!woman.checked) {
+                    error3.style.display = "block";
+               } else {
+                    error3.style.display = "none";
+                    html = html + '<td>' + 'жен' + '</td>';
+               }
+
+               if(option.selected === true) {
+                   error4.style.display = "block";
+               } else {
+                error4.style.display = "none";
+                html = html + '<td>' + select.value + '</td>';
+               }
+
+               
+               
+                html = html + '</tr>';
+                table.innerHTML = table.innerHTML + html;
+
+                name.value = "";
+                age.value = "";
+                man.checked = false;
+                woman.checked = false;
+                option.selected = true;
+            });
+        });
+    </script>
+</body>
+</html>

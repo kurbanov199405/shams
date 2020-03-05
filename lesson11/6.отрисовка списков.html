@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <div class="app">
+        <input v-model="text" @keydown.enter="addItem" type="text">
+        <hr>
+        <button @click="sortList">отсортировать</button>
+        <ul>
+            <li v-for="item in list">{{item}}</li>
+        </ul>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            new Vue({
+                el: ".app",
+                data: {
+                    list: ["Первое", "Второе", "Третье"],
+                    text: "",
+                },
+                methods: {
+                    addItem: function() {
+                        this.list.push(this.text);
+                        this.text = "";
+                    },
+                    sortList:function() {
+                        this.list.sort();
+                    },
+                },
+            });
+        }); 
+    </script>
+</body>
+</html>

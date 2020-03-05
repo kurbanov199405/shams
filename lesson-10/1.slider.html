@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        ul {
+            list-style-type: none;
+        }
+
+        .slider_container {
+            width: 400px;
+            height: 100px;
+            border: solid 1px;
+            overflow: hidden;
+            margin: 0 auto;
+            display: flex;
+            position: relative;
+        }
+
+        .slider {
+            display: flex;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+        }
+
+        .slider li {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            text-align: center;
+        }
+
+        button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .slider_prev {
+            left: 0;
+        }
+
+        .slider_next {
+            right: 0;
+        }
+
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const prevBtn = document.querySelector(".slider_prev");
+            const nextBtn = document.querySelector(".slider_next");
+            const list = document.querySelector(".slider")
+            let current = 0;
+
+            prevBtn.addEventListener("click", function() {
+                current++;
+
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="slider_container">
+        <button class="slider_prev">&lt;</button>
+        
+        <ul class="slider">
+            <li>slide1</li>
+            <li>slide2</li>
+            <li>slide3</li>
+        </ul>
+
+        <button class="slider_next">&gt;</button>
+    </div>
+</body>
+</html>

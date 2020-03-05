@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<title>вывод текста с интервалом</title>
+	<meta charset="utf-8" />
+	<script>
+	
+	</script>
+	<style>
+		#text {
+			opacity: 0;
+			white-space: pre;
+		}
+
+		#text::after {
+			content: '';
+			display: inline-block;
+			border-right: 10px solid;
+			height: 16px;
+			vertical-align: middle;
+			margin-left: 2px;
+			animation: 1s blink infinite;
+		}
+
+		@keyframes blink {
+			0% { opacity: 1; }
+			100% { opacity: 0; }
+		}
+
+		body {
+			background: #000;
+			color: #0f0;
+			font-family: monospace;
+			font-size: 18px;
+			padding: 15px;
+			letter-spacing: 2px;
+		}
+	</style>
+</head>
+<body>
+<div id="text">Wake up, Neo! Follow the white rabbit. Sleeping is for weak people.</div>
+
+<script>
+	window.addEventListener("DOMContentLoaded", function() {
+		//Задача нужно сделать так чтоб буквы текста выходили по порядку и чтоб могли печатать
+		//Забираем текст который нужно вывести
+		const textContainer = document.querySelector("#text");
+		//скопируем текст
+		const textCopy = textContainer.innerHTML;
+		//зачистим сам текст но не копию
+		textContainer.innerHTML = "";
+		textContainer.style.opacity = 1;
+		//заводим счетчик
+		let i = 0;
+		//создаем таймер
+		const timer = setInterval(function() {
+			textContainer.innerHTML += textCopy[i];
+			i++
+			
+			//если i больше или равно длине букв, мы останавливаем таймер
+			if(i >= textCopy.length - 1) {
+				clearInterval(timer);
+			}
+		}, 50);
+
+		//печать текста на клавиатуре
+		document.addEventListener("keypress", function(e) {
+			if(e.key === "Enter") {
+				textContainer.innerHTML += "\n";
+			} else {
+				textContainer.innerHTML += e.key;
+			}
+		});
+
+		document.addEventListener("keydown", function(e) {
+			if(e.key === "Backspace") {
+				textContainer.innerHTML = textContainer.innerHTML.slice(0, textContainer.innerHTML.length - 1);
+			}
+		});
+	});
+</script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <button class="load">Загрузить</button>
+    <div class="result"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> <!--подключаем библиотеку axsios -->
+   <script>
+       //делаем то же самое что и xmlHttpsRequest.html только меньше кода, в отличии от предыдущей он не очень кроссбраузерная
+       "use strict";
+       document.addEventListener("DOMContentLoaded", function() {
+          const load = document.querySelector(".load");
+          const result = document.querySelector(".result");
+
+          load.addEventListener("click", () => {
+           axios.get("https://randomuser.me/api/")
+            .then(response => {
+                //данные будут доступны только здесь
+                result.innerHTML = `Имя ${response.data.results[0].name.title} <br> mail ${response.data.results[0].email}`; // response  это ответ а data это его метод
+            });
+          }); 
+       });
+   </script> 
+</body>
+</html>
