@@ -4,8 +4,11 @@
 //загрузили мы его через npm
 const express = require("express");
 const faker = require("faker");
+const cors = require("cors");
 
 const app = express();
+
+app.use(cors());
 
 // если
 app.get("/", (req, res) => {
